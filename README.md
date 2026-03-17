@@ -1,2 +1,221 @@
 # first-code-
 this is the first code i made (using help of chatgpt) google/microsoft/ whichever place hires me in the future pls look at this and then hire me im really really cool
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fashion Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #0a0a0a;
+      color: white;
+      scroll-behavior: smooth;
+    }
+
+    /* 🔝 NAVBAR */
+    nav {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 20px;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(to right, #1d2b64, #f8cdda);
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      margin: 0;
+    }
+
+    .hero p {
+      opacity: 0.8;
+      margin-top: 10px;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ABOUT */
+    .about {
+      max-width: 600px;
+      margin: auto;
+      opacity: 0.85;
+    }
+
+    /* 💎 VIEWER */
+    .viewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(10px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+    }
+
+    .viewer.show {
+      display: flex;
+    }
+
+    .viewer img {
+      max-width: 90%;
+      max-height: 70%;
+      border-radius: 10px;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div>MyBrand</div>
+  <div>
+    <a href="#home">Home</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <h1>Fashion Portfolio ✨</h1>
+  <p>Curated aesthetics & personal style</p>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <h1>Gallery</h1>
+
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b">
+    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d">
+    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c">
+    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b">
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h1>About Me</h1>
+  <p class="about">
+    I’m passionate about color theory, fashion aesthetics, and creating visuals that tell a story. 
+    This portfolio reflects my exploration of style, mood, and design.
+  </p>
+</section>
+
+<!-- VIEWER -->
+<div class="viewer" id="viewer">
+  <div class="close" id="close">×</div>
+  <img id="viewerImg">
+</div>
+
+<script>
+  const images = document.querySelectorAll(".gallery img");
+  const viewer = document.getElementById("viewer");
+  const viewerImg = document.getElementById("viewerImg");
+  const closeBtn = document.getElementById("close");
+
+  let currentIndex = 0;
+
+  images.forEach((img, index) => {
+    img.addEventListener("click", () => {
+      currentIndex = index;
+      showImage();
+      viewer.classList.add("show");
+    });
+  });
+
+  function showImage() {
+    viewerImg.src = images[currentIndex].src;
+  }
+
+  closeBtn.onclick = () => viewer.classList.remove("show");
+
+  let startX = 0;
+
+  viewer.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+  });
+
+  viewer.addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+
+    if (startX - endX > 50) {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage();
+    } else if (endX - startX > 50) {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage();
+    }
+  });
+</script>
+
+</body>
+</html>
