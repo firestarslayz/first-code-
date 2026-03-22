@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>really tuff game</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 100px;
+            background: linear-gradient(to right, black, silver)
+        }
+
+        .box {
+            background: goldenrod;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 16px;
+            color: wheat;
+            cursor: pointer;
+            background-color: black;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>🎯 Guess the Number</h1>
+    <p>Pick a number between 1 and 10</p>
+
+    <input type="number" id="guessInput">
+    <br>
+
+    <button onclick="checkGuess()">Guess</button>
+    <button onclick="resetGame()">Restart</button>
+
+    <p id="result"></p>
+</div>
+
+<script>
+let secretNumber = Math.floor(Math.random() * 10) + 1;
+let attempts = 0;
+
+function checkGuess() {
+    let guess = Number(document.getElementById("guessInput").value);
+    let result = document.getElementById("result");
+
+    if (!guess) {
+        result.textContent = "⚠️ Enter a number!";
+        return;
+    }
+
+    attempts++;
+
+    if (guess < secretNumber) {
+        result.textContent = "📉 Too low! Attempts: " + attempts;
+    } 
+    else if (guess > secretNumber) {
+        result.textContent = "📈 Too high! Attempts: " + attempts;
+    } 
+    else {
+        result.textContent = "🎉 You got it in " + attempts + " tries!";
+    }
+}
+
+function resetGame() {
+    secretNumber = Math.floor(Math.random() * 10) + 1;
+    attempts = 0;
+    document.getElementById("result").textContent = "";
+    document.getElementById("guessInput").value = "";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>battle game</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(to right, #1e1e2f, #3a3a5f);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      text-shadow: 0 0 10px mediumvioletred;
+    }
+
+    .stats {
+      margin: 20px;
+      font-size: 20px;
+    }
+
+    button {
+      padding: 15px 25px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #444;
+      color: white;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: mediumvioletred;
+      color: black;
+      box-shadow: 0 0 100px mediumorchid;
+    }
+
+    #log {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(0,0,0,0.5);
+      height: 200px;
+      overflow-y: auto;
+      border-radius: 10px;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Battle game</h1>
+
+  <div class="stats">
+    ❤️ Player HP: <span id="playerHP">100</span> |
+    👿 Enemy HP: <span id="enemyHP">100</span><br>
+    ⚡ Specials Left: <span id="special">3</span>
+  </div>
+
+  <div>
+    <button onclick="playerAction('attack')">💥 Attack</button>
+    <button onclick="playerAction('heal')">💚 Heal</button>
+    <button onclick="playerAction('special')">⚡ Special</button>
+  </div>
+
+  <div id="log"></div>
+
+<script>
+let playerHP = 100;
+let enemyHP = 100;
+let playerSpecial = 3;
+let enemySpecial = 2;
+
+function updateUI() {
+  document.getElementById("playerHP").textContent = playerHP;
+  document.getElementById("enemyHP").textContent = enemyHP;
+  document.getElementById("special").textContent = playerSpecial;
+}
+
+function log(message) {
+  let logBox = document.getElementById("log");
+  logBox.innerHTML += "<p>" + message + "</p>";
+  logBox.scrollTop = logBox.scrollHeight;
+}
+
+function playerAction(action) {
+  if (playerHP <= 0 || enemyHP <= 0) return;
+
+  if (action === "attack") {
+    let dmg = Math.floor(Math.random() * 20) + 5;
+    enemyHP -= dmg;
+    log("💥 You hit for " + dmg);
+  }
+
+  else if (action === "heal") {
+    let heal = Math.floor(Math.random() * 15) + 5;
+    playerHP += heal;
+    log("💚 You healed " + heal);
+  }
+
+  else if (action === "special") {
+    if (playerSpecial > 0) {
+      playerSpecial--;
+      if (Math.random() > 0.3) {
+        let dmg = Math.floor(Math.random() * 40) + 20;
+        enemyHP -= dmg;
+        log("⚡ SPECIAL hits for " + dmg);
+      } else {
+        log("💨 Special missed!");
+      }
+    } else {
+      log("❌ No specials left!");
+      return;
+    }
+  }
+
+  updateUI();
+
+  if (enemyHP > 0) {
+    setTimeout(enemyTurn, 500);
+  } else {
+    log("🏆 You win!");
+  }
+}
+
+function enemyTurn() {
+  let action;
+
+  if (enemyHP < 30 && Math.random() < 0.6) {
+    action = "heal";
+  } else if (enemySpecial > 0 && Math.random() < 0.3) {
+    action = "special";
+  } else {
+    action = "attack";
+  }
+
+  if (action === "attack") {
+    let dmg = Math.floor(Math.random() * 20) + 5;
+    playerHP -= dmg;
+    log("👿 Enemy hits for " + dmg);
+  }
+
+  else if (action === "heal") {
+    let heal = Math.floor(Math.random() * 15) + 5;
+    enemyHP += heal;
+    log("💚 Enemy heals " + heal);
+  }
+
+  else if (action === "special") {
+    enemySpecial--;
+    if (Math.random() > 0.3) {
+      let dmg = Math.floor(Math.random() * 35) + 15;
+      playerHP -= dmg;
+      log("⚡ Enemy SPECIAL for " + dmg);
+    } else {
+      log("💨 Enemy missed special!");
+    }
+  }
+
+  updateUI();
+
+  if (playerHP <= 0) {
+    log("💀 You lost!");
+  }
+}
+
+updateUI();
+</script>
+
+</body>
+</html>

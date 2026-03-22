@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>my cool gallery</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: black;
+      color: darkgoldenrod;
+      text-align: center;
+    }
+    h1 {
+      margin: 20px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+    }
+
+    .gallery img {
+      width: 180px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Fullscreen viewer */
+    #viewer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      justify-content: center;
+      align-items: center;
+    }
+
+    #viewer img {
+      max-width: 85%;
+      max-height: 85%;
+      border-radius: 10px;
+    }
+
+    /* Buttons */
+    #close, #prev, #next {
+      position: absolute;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    #close {
+      top: 20px;
+      right: 30px;
+    }
+
+    #prev {
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    #next {
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
+
+</head>
+<body>
+
+<h1>gallery</h1>
+
+<div class="gallery"></div>
+
+<!-- Viewer -->
+<div id="viewer">
+  <span id="close" onclick="closeImage()">✕</span>
+  <span id="prev" onclick="prevImage()">❮</span>
+  <img id="fullImage">
+  <span id="next" onclick="nextImage()">❯</span>
+</div>
+
+<script>
+  // Your images
+  const images = [
+    "https://picsum.photos/500/300?1",
+    "https://picsum.photos/500/300?2",
+    "https://picsum.photos/500/300?3",
+    "https://picsum.photos/500/300?4",
+    "https://picsum.photos/500/300?5"
+  ];
+
+  const gallery = document.querySelector(".gallery");
+  const viewer = document.getElementById("viewer");
+  const fullImage = document.getElementById("fullImage");
+
+  let currentIndex = 0;
+
+  // Create images
+  images.forEach((src, index) => {
+    const img = document.createElement("img");
+    img.src = src;
+
+    img.onclick = () => {
+      currentIndex = index;
+      openImage();
+    };
+
+    gallery.appendChild(img);
+  });
+
+  // Open viewer
+  function openImage() {
+    fullImage.src = images[currentIndex];
+    viewer.style.display = "flex";
+  }
+
+  // Close viewer
+  function closeImage() {
+    viewer.style.display = "none";
+  }
+
+  // Next image
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    openImage();
+  }
+
+  // Previous image
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    openImage();
+  }
+</script>
+
+</body>
+</html>
