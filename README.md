@@ -1,0 +1,7 @@
+In this project, I have 5 different codes which are written in Javascript:
+1. The 'homepage' of my portfolio. This is where you can click on 4 buttons, each leading to a simple game.
+2. The first code is a guessing game, where you insert a number from 1-10 into the result box, and it tells you if the number is too high or too low, and even the attempts it took you to get it right. This project also has a 'Retry' button for after you guess the number.
+3. The second leads to a simple calculator I made, which includes clickable buttons from 1 to 0 and 4 different operations. This project also has a 'result' button, which you click to collect your answer.
+4. The third code leads to a 'Gallery' of sorts, where you can click on different pictures to open them, and you can slide through them. The pictures are randomized every time you close and reopen the gallery.
+5. The fourth code brings you to a simple attack-based game. In this game, you and the enemy have 20hp each, and you can either choose to attack your enemy with choice 1 (which attacks with 5-8 damage) or choice 2 (which attacks with 8-12 damage but has a 50% chance of missing.) The enemy can hit you back with a range of 4-7 damage, and you have to make sure the enemy gets taken out before you do.
+All projects have been made by me. I'm in the process of teaching myself Javascript using Youtube videos online and testing myself with ChatGPT.
