@@ -1,7 +1,15 @@
 In this project, I have 6 different codes which are written in Javascript:
+
 1. The 'homepage' of my portfolio. This is where you can click on 4 buttons, each leading to a simple game.
+
 2. The first code is a guessing game, where you insert a number from 1-10 into the result box, and it tells you if the number is too high or too low, and even the attempts it took you to get it right. This project also has a 'Retry' button for after you guess the number.
+
 3. The second leads to a simple calculator I made, which includes clickable buttons from 1 to 0 and 4 different operations. This project also has a 'result' button, which you click to collect your answer.
+
 4. The third code leads to a 'Gallery' of sorts, where you can click on different pictures to open them, and you can slide through them. The pictures are randomized every time you close and reopen the gallery.
+
 5. The fourth code brings you to a simple attack-based game. In this game, you and the enemy have 100hp each, and you can either choose to attack your enemy with attack (which attacks with 5-24 damage), special attack (which attacks with 20-60 damage but has a 30% chance of missing. You can only use special attack 3 times), or heal (regenerate 5-20 health). This game works using buttons provided, and a small prompt box where it tells you how much damage you inflicted, your turn, or if you win or lose. The enemy can also use attack, special attack, or heal, and is programmed to do so under specfic conditions (such as if the enemy's health is below 30, heal)
-6. The sixth code is a small fashion website i designed where you have a homepage, a gallery (with the same pictures that you can click to enlarge and slide through) 
+
+6. The sixth code is a small fashion website i designed where you have a homepage, a gallery (with the same pictures that you can click to enlarge and slide through), and an about me section. The top has shortcuts to each page, but you can swipe up on the homepage to reach them too.
+
+These projects are of my own creation. 
